@@ -36,10 +36,10 @@ const GoldPricePage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Gold Price</h1>
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-4">ราคาทองตามประกาศของสมาคมค้าทองคำ</h1>
+      <div className="bg-GoldPrice p-6 rounded-lg shadow-md">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold">Current Prices</h2>
+          <h2 className="text-xl font-semibold"> ประจำวันที่</h2>
           <p className="text-lg">Sell Price: ${goldPrice.sellPrice.toFixed(2)}</p>
           <p className="text-lg">Buy Price: ${goldPrice.buyPrice.toFixed(2)}</p>
           <p className="text-lg">Difference: ${goldPrice.diff.toFixed(2)}</p>
