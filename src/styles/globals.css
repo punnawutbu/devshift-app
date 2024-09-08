@@ -1,0 +1,166 @@
+/* globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #bebebe;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin-left: 1rem;
+}
+
+.navbar a {
+  color: #1f2937;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: #4b5563;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    display: block;
+    text-align: center;
+  }
+
+  .navbar li {
+    margin: 0.5rem 0;
+  }
+}
+
+.footer {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer .logo {
+  margin-bottom: 1rem;
+}
+
+.footer h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.footer p {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.footer .details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer .details div {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.footer .details span {
+  margin-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    text-align: left;
+  }
+
+  .footer .container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer .details {
+    text-align: left;
+  }
+
+  /* globals.css */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bg-white {
+    background-color: #ffffff;
+  }
+
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+}
