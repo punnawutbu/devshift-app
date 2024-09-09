@@ -1,0 +1,16 @@
+# cpanel.yml
+version: 1
+steps:
+  - name: Install Node.js
+    run: |
+      curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+      yum install -y nodejs
+  - name: Install dependencies
+    run: yarn install
+  - name: Build the project
+    run: yarn build
+  - name: Export static files
+    run: yarn export
+  - name: Move files to public_html
+    run: |
+      rsync -avh --delete out/ /home/zkwpszwh/public_html/
