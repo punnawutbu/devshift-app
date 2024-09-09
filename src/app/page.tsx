@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold mb-4">Welcome to DevShift App</h1>
+    <div className="home-page">
+      <h1 className="text-4xl font-bold mb-4  color-text">Welcome to DevShift.Dev</h1>
       <Image
         src="/images/devshift-signature.svg"
         alt="Logo"
