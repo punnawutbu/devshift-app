@@ -14,6 +14,12 @@
     --foreground: #ededed;
   }
 }
+@media (min-width: 1200px) {
+  .col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
 
 body {
   color: var(--foreground);
@@ -38,11 +44,11 @@ body {
 }
 
 .home-page {
-    display: flex;
-    flex-direction: column; /* ใช้คำสั่งที่ถูกต้องสำหรับการจัดแนวคอลัมน์ */
-    align-items: center; /* จัดวางลูกในแนวแกนข้าม */
-    justify-content: center; /* จัดวางลูกในแนวแกนหลัก */
-    min-height: 100vh; /* ใช้ 100vh สำหรับความสูงของหน้าจอทั้งหมด */
+  display: flex;
+  flex-direction: column; /* ใช้คำสั่งที่ถูกต้องสำหรับการจัดแนวคอลัมน์ */
+  align-items: center; /* จัดวางลูกในแนวแกนข้าม */
+  justify-content: center; /* จัดวางลูกในแนวแกนหลัก */
+  min-height: 100vh; /* ใช้ 100vh สำหรับความสูงของหน้าจอทั้งหมด */
 }
 
 .navbar {
@@ -180,7 +186,7 @@ body {
     background-color: #ffffff;
   }
   .color-text-GoldPrice {
-    color: #9F1E22;
+    color: #9f1e22;
   }
   .goldtype-desc {
     font-style: normal;
@@ -189,5 +195,17 @@ body {
     line-height: 38px;
     text-transform: uppercase;
     color: #6a6a65;
+  }
+  .container {
+    max-width: 100%;
+  }
+
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+
+  .col {
+    padding: 10px;
   }
 }

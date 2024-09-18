@@ -1,47 +1,78 @@
 .body {
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    /* background-color: #fdf3b1; */
+  font-family: "Arial", sans-serif;
+  padding: 20px;
+  /* background-color: #fdf3b1; */
 }
 
 .header-style {
-    /* background-color: #ffde00; */
-    padding: 10px;
+  /* background-color: #ffde00; */
+  padding: 10px;
 }
 
 .price-th {
-    font-weight: bold;
-    /* color: #d3a901; */
+  font-weight: bold;
+  /* color: #d3a901; */
 }
 
 .date-time {
-    font-size: 1rem;
-    font-weight: bold;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .row-size {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .cmi {
-    background-color: #fff3cd;
-    padding: 15px;
-    font-size: 1.2rem;
+  background-color: #fff3cd;
+  padding: 15px;
+  font-size: 1.2rem;
 }
 
 .price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ff0000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff0000;
 }
 
 .head-gold-type {
-    font-weight: bold;
-    color: #000;
+  font-weight: bold;
+  color: #000;
 }
 
 .page-footer {
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.9rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* src/app/gold-price/gold-price.css */
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card p {
+  margin: 10px 0;
+}
+
+.noData {
+  text-align: center;
+  color: #999;
 }
