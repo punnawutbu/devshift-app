@@ -27,25 +27,9 @@ const GoldPricePage: React.FC = () => {
     };
 
     fetchGoldPrice();
+    const intervalId = setInterval(fetchGoldPrice, 1200000); // 20 นาที = 1200000 มิลลิวินาที
+    return () => clearInterval(intervalId);
   }, []);
-
-  // return (
-  //   <div>
-  //     <h1>ราคาทองคำ</h1>
-  //     {goldPrice ? (
-  //       <div>
-  //         <p>ราคาทองคำแท่ง (ซื้อ): {goldPrice.buy_bar} บาท</p>
-  //         <p>ราคาทองคำแท่ง (ขาย): {goldPrice.sell_bar} บาท</p>
-  //         <p>ราคาทองคำรูปพรรณ (ซื้อ): {goldPrice.buy_ornament} บาท</p>
-  //         <p>ราคาทองคำรูปพรรณ (ขาย): {goldPrice.sell_ornament} บาท</p>
-  //         <p>วันที่: {goldPrice.date}</p>
-  //         <p>เวลาอัปเดต: {goldPrice.updatetime}</p>
-  //       </div>
-  //     ) : (
-  //       <p>ไม่มีข้อมูลราคาทองคำ</p>
-  //     )}
-  //   </div>
-  // );
   return (
     <>
       {goldPrice ? (
