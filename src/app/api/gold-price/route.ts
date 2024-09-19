@@ -1,4 +1,4 @@
-// src/app/api/gold-price/route.ts
+
 import { NextResponse } from 'next/server';
 import { getGoldPrice } from '../../../../service/goldPriceService';
 
