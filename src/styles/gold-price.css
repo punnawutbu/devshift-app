@@ -5,24 +5,35 @@
 }
 
 .header-style {
-  background-color: #ffd700;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  /* background-color: #ffd700; */
+  font-weight: bold;
+  padding: 0.9375rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.25rem;
+  color: #DAA520;
+  font-size: 2.5rem;
 }
 
-.header-text {
+.header-gold-row {
+  font-weight: bold;
+  font-size: 2rem;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.price {
+  color: #2F4F4F;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .Gold-Text {
-  color: #b8860b;
+  color: #DAA520;
   font-size: 1.2rem;
 }
 
 .row-size {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  padding: 10px;
 }
 
 .price {
@@ -31,6 +42,7 @@
 }
 
 .page-footer {
+  margin-bottom: 2rem;
   text-align: center;
   color: #555;
 }

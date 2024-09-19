@@ -2,6 +2,7 @@
 "use client";
 import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function Footer() {
   return (
@@ -26,19 +27,19 @@ export default function Footer() {
 
             <ul className="list-unstyled">
               <li className="mb-2">
-                <span role="img" aria-label="phone">📞</span> 
+              <i className="bi bi-phone"></i>
                 <span className="ms-2">+668-0752-0397</span>
               </li>
               <li className="mb-2">
-                <span role="img" aria-label="email">📧</span>
+              <i className="bi bi-envelope"></i>
                 <span className="ms-2">punnawut_bucha@outlook.com</span>
               </li>
               <li className="mb-2">
-                <span role="img" aria-label="location">📍</span>
+                <i className="bi bi-geo-alt"></i>
                 <span className="ms-2">Phra Samut Chedi, Samut Prakan</span>
               </li>
               <li>
-                <span role="img" aria-label="github">🐙</span>
+                <i className="bi bi-github"></i>
                 <a
                   href="https://github.com/punnawutbu"
                   target="_blank"

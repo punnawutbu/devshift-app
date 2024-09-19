@@ -47,24 +47,21 @@ const GoldPricePage: React.FC = () => {
             <div className="header-text">
               <Label className="Gold-Text">Gold Price by GTA / ราคาทองตามประกาศของสมาคมค้าทองคำ</Label>
             </div>
-            <Col className="col-8" style={{ margin: '1.25rem 0' }}>
-              <Label className="Gold-Text">ประจำวันที่ {goldPrice.date} {goldPrice.time}</Label>
-            </Col>
-            <Col style={{ margin: '1.25rem 0' }}>
-              <Label className="date-time Gold-Text">{goldPrice.updatetime}</Label>
+            <Col className="col-8">
+              <Label className="Gold-Text">ประจำวันที่ {goldPrice.date} {goldPrice.time} {goldPrice.updatetime}</Label>
             </Col>
           </Row>
 
           {/* Price Headers */}
-          <Row className="header-price-row row-size">
+          <Row className="header-gold-row">
             <Col>
-              <Label className="head-1 Gold-Text">ราคาทองคำ</Label>
+              <Label className="Gold-Text">ราคาทองคำ</Label>
             </Col>
             <Col>
-              <Label className="head-1 Gold-Text">ขายออก</Label>
+              <Label className="Gold-Text">ขายออก</Label>
             </Col>
             <Col>
-              <Label className="head-1 Gold-Text">รับซื้อ</Label>
+              <Label className="Gold-Text">รับซื้อ</Label>
             </Col>
           </Row>
 
@@ -95,9 +92,9 @@ const GoldPricePage: React.FC = () => {
           </Row>
 
           {/* Footer */}
-          <Row className="page-footer" style={{ marginBottom: '8.125rem' }}>
+          <div className="page-footer" style={{ marginBottom: '8.125rem' }}>
             <Label>ข้อมูลจาก สมาคมค้าทองคำ</Label>
-          </Row>
+          </div>
         </div>
       ) : (
         <p>ไม่มีข้อมูลราคาทองคำ</p>
