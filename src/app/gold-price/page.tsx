@@ -19,24 +19,100 @@ const GoldPricePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchGoldPrice = async () => {
       try {
         const response = await fetch('/api/gold-price');
         const data: GoldPrice = await response.json();
-        setGoldPrice(data);
-        setLoading(false);
+        // setGoldPrice(data);
+        if (isMounted && JSON.stringify(data) !== JSON.stringify(goldPrice)) {
+          setGoldPrice(data);
+        }
+        // setLoading(false);
+        if (isMounted && loading) {
+          setLoading(false);
+        }
       } catch (error) {
         console.error('Error fetching gold price:', error);
-        setLoading(false);
+        // setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchGoldPrice();
     const intervalId = setInterval(fetchGoldPrice, 5 * 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+    //   return () => clearInterval(intervalId);
+    // }, []);
+    return () => {
+      isMounted = false;  // ป้องกันการอัพเดทเมื่อคอมโพเนนท์ถูก unmount
+      clearInterval(intervalId);
+    };
+  }, [goldPrice, loading]);
 
   return (
+    // <>
+    //   {loading ? (
+    //     <LoadingSpinner />
+    //   ) : goldPrice ? (
+    //     <div className="body">
+    //       {/* Header */}
+    //       <Row className="header-style">
+    //         <div className="header-text">
+    //           <Label className="Gold-Text">Gold Price by GTA / ราคาทองตามประกาศของสมาคมค้าทองคำ</Label>
+    //         </div>
+    //         <Col className="col-8">
+    //           <Label className="Gold-Text">ประจำวันที่ {goldPrice.date} {goldPrice.time} {goldPrice.updatetime}</Label>
+    //         </Col>
+    //       </Row>
+
+    //       {/* Price Headers */}
+    //       <Row className="header-gold-row">
+    //         <Col>
+    //           <Label className="Gold-Text">ราคาทองคำ</Label>
+    //         </Col>
+    //         <Col>
+    //           <Label className="Gold-Text">ขายออก</Label>
+    //         </Col>
+    //         <Col>
+    //           <Label className="Gold-Text">รับซื้อ</Label>
+    //         </Col>
+    //       </Row>
+
+    //       {/* Gold Bar 96.5% */}
+    //       <Row className="row-size">
+    //         <Col>
+    //           <Label className="Gold-Text">ทองคำแท่ง 96.5%</Label>
+    //         </Col>
+    //         <Col>
+    //           <Label className="price">{goldPrice.sell_bar}</Label>
+    //         </Col>
+    //         <Col>
+    //           <Label className="price">{goldPrice.buy_bar}</Label>
+    //         </Col>
+    //       </Row>
+
+    //       {/* Gold Ornament 96.5% */}
+    //       <Row className="row-size">
+    //         <Col>
+    //           <Label className="Gold-Text">ทองรูปพรรณ 96.5%</Label>
+    //         </Col>
+    //         <Col>
+    //           <Label className="price">{goldPrice.sell_ornament}</Label>
+    //         </Col>
+    //         <Col>
+    //           <Label className="price">{goldPrice.buy_ornament}</Label>
+    //         </Col>
+    //       </Row>
+
+    //       {/* Footer */}
+    //       <div className="page-footer" style={{ marginBottom: '8.125rem' }}>
+    //         <Label>ข้อมูลจาก สมาคมค้าทองคำ</Label>
+    //       </div>
+    //     </div>
+    //   ) : (
+    //     <p>ไม่มีข้อมูลราคาทองคำ</p>
+    //   )}
+    // </>
     <>
       {loading ? (
         <LoadingSpinner />
@@ -45,48 +121,52 @@ const GoldPricePage: React.FC = () => {
           {/* Header */}
           <Row className="header-style">
             <div className="header-text">
-              <Label className="Gold-Text">Gold Price by GTA / ราคาทองตามประกาศของสมาคมค้าทองคำ</Label>
+              <Label className="Gold-Text">
+                Gold Price by GTA / ราคาทองตามประกาศของสมาคมค้าทองคำ
+              </Label>
             </div>
-            <Col className="col-8">
-              <Label className="Gold-Text">ประจำวันที่ {goldPrice.date} {goldPrice.time} {goldPrice.updatetime}</Label>
+            <Col xs={12} >
+              <Label className="Gold-Text">
+                ประจำวันที่ {goldPrice.date} {goldPrice.time} {goldPrice.updatetime}
+              </Label>
             </Col>
           </Row>
 
           {/* Price Headers */}
           <Row className="header-gold-row">
-            <Col>
+            <Col xs={6} md={4}>
               <Label className="Gold-Text">ราคาทองคำ</Label>
             </Col>
-            <Col>
+            <Col xs={3} md={4}>
               <Label className="Gold-Text">ขายออก</Label>
             </Col>
-            <Col>
+            <Col xs={3} md={4}>
               <Label className="Gold-Text">รับซื้อ</Label>
             </Col>
           </Row>
 
           {/* Gold Bar 96.5% */}
           <Row className="row-size">
-            <Col>
+            <Col xs={6} md={4}>
               <Label className="Gold-Text">ทองคำแท่ง 96.5%</Label>
             </Col>
-            <Col>
+            <Col xs={3} md={4}>
               <Label className="price">{goldPrice.sell_bar}</Label>
             </Col>
-            <Col>
+            <Col xs={3} md={4}>
               <Label className="price">{goldPrice.buy_bar}</Label>
             </Col>
           </Row>
 
           {/* Gold Ornament 96.5% */}
           <Row className="row-size">
-            <Col>
+            <Col xs={6} md={4}>
               <Label className="Gold-Text">ทองรูปพรรณ 96.5%</Label>
             </Col>
-            <Col>
+            <Col xs={3} md={4}>
               <Label className="price">{goldPrice.sell_ornament}</Label>
             </Col>
-            <Col>
+            <Col xs={3} md={4}>
               <Label className="price">{goldPrice.buy_ornament}</Label>
             </Col>
           </Row>
@@ -100,6 +180,7 @@ const GoldPricePage: React.FC = () => {
         <p>ไม่มีข้อมูลราคาทองคำ</p>
       )}
     </>
+
   );
 };
 

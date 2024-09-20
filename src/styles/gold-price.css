@@ -10,8 +10,11 @@
   padding: 0.9375rem;
   border-radius: 0.5rem;
   margin-bottom: 1.25rem;
-  color: #DAA520;
+  color: #daa520;
   font-size: 2.5rem;
+  padding: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .header-gold-row {
@@ -21,13 +24,13 @@
 }
 
 .price {
-  color: #2F4F4F;
+  color: #2f4f4f;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .Gold-Text {
-  color: #DAA520;
+  color: #daa520;
   font-size: 1.2rem;
 }
 
@@ -45,6 +48,10 @@
   margin-bottom: 2rem;
   text-align: center;
   color: #555;
+
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
 }
 
 .loading-text {
@@ -67,5 +74,37 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+@media (max-width: 576px) {
+  .header-text {
+    font-size: 0.9rem; /* ลดขนาดฟอนต์ในหน้าจอเล็ก */
+  }
+
+  .row-size {
+    font-size: 0.8rem; /* ลดขนาดฟอนต์ในรายละเอียด */
+    margin-bottom: 0.5rem;
+  }
+
+  .price {
+    font-size: 0.8rem;
+  }
+
+  .Gold-Text {
+    font-size: 1rem; /* ขนาดข้อความในหน้าจอเล็ก */
+  }
+}
+
+@media (min-width: 768px) {
+  .header-text {
+    font-size: 1.2rem;
+  }
+
+  .price {
+    font-size: 1.1rem;
+  }
+
+  .Gold-Text {
+    font-size: 1.2rem;
   }
 }
