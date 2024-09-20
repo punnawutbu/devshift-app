@@ -7,7 +7,7 @@ import { Label } from "reactstrap";
 export default function Home() {
   return (
     <div className="container text-center py-5">
-      <Label style={{ fontSize: '3rem' }}>Welcome to </Label>  <Label style={{ fontSize: '3rem', color: '#f5994b' }}>DevShift.Dev</Label>
+      <Label style={{ fontWeight: 'bold', fontSize: '3rem' }}>Welcome to </Label>  <Label style={{ fontWeight: 'bold', fontSize: '3rem', color: '#f5994b' }}>DevShift.Dev</Label>
       {/* <Image
         src="/images/devshift-signature.svg"
         alt="DevShift Logo"
