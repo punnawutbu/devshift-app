@@ -18,30 +18,42 @@ const GoldPricePage: React.FC = () => {
   const [goldPrice, setGoldPrice] = useState<GoldPrice>();
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const fetchGoldPrice = async () => {
+  //     try {
+  //       const response = await fetch('/api/gold-price');
+  //       const data: GoldPrice = await response.json();
+  //       setGoldPrice(data);
+  //       setLoading(false);
+  //       console.log('data' , typeof data );
+  //       console.log('buy_bar' , typeof data.buy_bar );
+  //     } catch (error) {
+  //       console.error('Error fetching gold price:', error);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   const intervalId = setInterval(fetchGoldPrice, 5000);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
   useEffect(() => {
-    // ฟังก์ชันเพื่อเรียก API
     const fetchGoldPrice = async () => {
       try {
-        const response = await fetch('/api/gold-price');
-        const data: GoldPrice = await response.json();
+        const response = await fetch('/.netlify/functions/getGoldPrice');
+        const data = await response.json();
         setGoldPrice(data);
         setLoading(false);
-        console.log('data' , typeof data );
-        console.log('buy_bar' , typeof data.buy_bar );
       } catch (error) {
         console.error('Error fetching gold price:', error);
         setLoading(false);
       }
     };
 
-    // เรียก API ทุก ๆ 2 วินาที (5000 ms)
-    const intervalId = setInterval(fetchGoldPrice, 5000);
-
-    // cleanup function เพื่อหยุดการเรียก API เมื่อ component unmount
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []); // [] ensures effect runs only on mount/unmount
+    fetchGoldPrice();
+    const intervalId = setInterval(fetchGoldPrice, 5 * 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <>

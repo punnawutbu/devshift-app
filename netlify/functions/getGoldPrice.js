@@ -3,7 +3,6 @@ const cheerio = require("cheerio");
 const nodeCache = require("node-cache");
 
 const cache = new nodeCache();
-const count = 0;
 const cacheKey = "thaiGold";
 const urlGTA = "https://www.goldtraders.or.th/default.aspx";
 const monthTh = {
@@ -21,7 +20,7 @@ const monthTh = {
   "12": "ธันวาคม",
 };
 
-const getGoldPrice = () => {
+exports.handler = async (event, context) => {
   return new Promise((resolve, reject) => {
     let data = cache.get(cacheKey);
 
@@ -56,19 +55,23 @@ const getGoldPrice = () => {
             updatetime: update_time,
           };
           cache.set(cacheKey, data, 120);
-          resolve(data);
-          console.log("Get gold price from website");
+          resolve({
+            statusCode: 200,
+            body: JSON.stringify(data),
+          });
         } else {
           console.log(`Error fetching gold price: ${error}`);
-          resolve(null);
+          resolve({
+            statusCode: 500,
+            body: JSON.stringify({ error: "Error fetching gold price" }),
+          });
         }
       });
     } else {
-      resolve(data);
-      console.log("Get gold price from cache");
+      resolve({
+        statusCode: 200,
+        body: JSON.stringify(data),
+      });
     }
-    
   });
 };
-
-module.exports = { getGoldPrice };
