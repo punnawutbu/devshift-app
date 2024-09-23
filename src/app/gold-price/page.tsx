@@ -15,7 +15,7 @@ interface GoldPrice {
 }
 
 const GoldPricePage: React.FC = () => {
-  const [goldPrice, setGoldPrice] = useState<GoldPrice | null>(null);
+  const [goldPrice, setGoldPrice] = useState<GoldPrice>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,6 +26,8 @@ const GoldPricePage: React.FC = () => {
         const data: GoldPrice = await response.json();
         setGoldPrice(data);
         setLoading(false);
+        console.log('data' , typeof data );
+        console.log('buy_bar' , typeof data.buy_bar );
       } catch (error) {
         console.error('Error fetching gold price:', error);
         setLoading(false);
@@ -45,7 +47,7 @@ const GoldPricePage: React.FC = () => {
     <>
       {loading ? (
         <LoadingSpinner />
-      ) : goldPrice ? (
+      ) : (
         <div className="body">
           {/* Header */}
           <Row className="header-style">
@@ -56,7 +58,7 @@ const GoldPricePage: React.FC = () => {
             </div>
             <Col xs={12} >
               <Label className="Gold-Text">
-                ประจำวันที่ {goldPrice.date} {goldPrice.time} {goldPrice.updatetime}
+                ประจำวันที่ {goldPrice?.date} {goldPrice?.time} {goldPrice?.updatetime}
               </Label>
             </Col>
           </Row>
@@ -80,10 +82,10 @@ const GoldPricePage: React.FC = () => {
               <Label className="Gold-Text">ทองคำแท่ง 96.5%</Label>
             </Col>
             <Col xs={3} md={4}>
-              <Label className="price">{goldPrice.sell_bar}</Label>
+              <Label className="price">{goldPrice?.sell_bar}</Label>
             </Col>
             <Col xs={3} md={4}>
-              <Label className="price">{goldPrice.buy_bar}</Label>
+              <Label className="price">{goldPrice?.buy_bar}</Label>
             </Col>
           </Row>
 
@@ -93,10 +95,10 @@ const GoldPricePage: React.FC = () => {
               <Label className="Gold-Text">ทองรูปพรรณ 96.5%</Label>
             </Col>
             <Col xs={3} md={4}>
-              <Label className="price">{goldPrice.sell_ornament}</Label>
+              <Label className="price">{goldPrice?.sell_ornament}</Label>
             </Col>
             <Col xs={3} md={4}>
-              <Label className="price">{goldPrice.buy_ornament}</Label>
+              <Label className="price">{goldPrice?.buy_ornament}</Label>
             </Col>
           </Row>
 
@@ -105,8 +107,6 @@ const GoldPricePage: React.FC = () => {
             <Label>ข้อมูลจาก สมาคมค้าทองคำ</Label>
           </div>
         </div>
-      ) : (
-        <p>ไม่มีข้อมูลราคาทองคำ</p>
       )}
     </>
 
