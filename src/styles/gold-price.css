@@ -1,6 +1,6 @@
 /* style.css */
 .body {
-  padding: 20px;
+  padding: 1rem;
 }
 
 .header-style {
@@ -15,6 +15,7 @@
   font-weight: bold;
   font-size: 2rem;
   padding: 1rem;
+  justify-content: center;
   text-align: center;
   border-bottom: 1px solid #daa520;
   border-top: 1px solid #daa520;
@@ -22,6 +23,7 @@
 
 .gold-price-row {
   padding: 1rem;
+  justify-content: center;
   text-align: center;
   border-bottom: 1px solid #daa520;
 }
@@ -47,10 +49,7 @@
 }
 
 .page-footer {
-  margin-bottom: 2rem;
-  text-align: center;
   color: #555;
-
   padding: 1rem;
   text-align: center;
   font-weight: bold;
