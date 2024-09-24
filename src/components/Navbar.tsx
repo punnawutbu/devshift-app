@@ -63,7 +63,12 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light py-3">
       <div className="container">
-        <h1 className="h4 font-weight-bold text-muted">DevShift.Dev</h1>
+        {/* <h1 className="h4 font-weight-bold text-muted">DevShift.Dev</h1> */}
+        <Link href="/" className="h4 font-weight-bold text-muted" style={{ textDecoration: 'none' }} onClick={handleMenuClick}>
+          DevShift.Dev
+        </Link>
+
+
 
         {/* Hamburger Button */}
         <button

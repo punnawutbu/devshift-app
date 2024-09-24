@@ -88,30 +88,33 @@ const GoldPricePage: React.FC = () => {
             </Col>
           </Row>
 
-          {/* Gold Bar 96.5% */}
-          <Row className="row-size">
-            <Col xs={6} md={4}>
-              <Label className="Gold-Text">ทองคำแท่ง 96.5%</Label>
-            </Col>
-            <Col xs={3} md={4}>
-              <Label className="price">{goldPrice?.sell_bar}</Label>
-            </Col>
-            <Col xs={3} md={4}>
-              <Label className="price">{goldPrice?.buy_bar}</Label>
-            </Col>
-          </Row>
+          <Row className="gold-price-row">
+            {/* Gold Bar 96.5% */}
+            <Row className="row-size">
+              <Col xs={6} md={4}>
+                <Label className="Gold-Text">ทองคำแท่ง 96.5%</Label>
+              </Col>
+              <Col xs={3} md={4}>
+                <Label className="price">{goldPrice?.sell_bar}</Label>
+              </Col>
+              <Col xs={3} md={4}>
+                <Label className="price">{goldPrice?.buy_bar}</Label>
+              </Col>
+            </Row>
 
-          {/* Gold Ornament 96.5% */}
-          <Row className="row-size">
-            <Col xs={6} md={4}>
-              <Label className="Gold-Text">ทองรูปพรรณ 96.5%</Label>
-            </Col>
-            <Col xs={3} md={4}>
-              <Label className="price">{goldPrice?.sell_ornament}</Label>
-            </Col>
-            <Col xs={3} md={4}>
-              <Label className="price">{goldPrice?.buy_ornament}</Label>
-            </Col>
+            {/* Gold Ornament 96.5% */}
+            <Row className="row-size">
+              <Col xs={6} md={4}>
+                <Label className="Gold-Text">ทองรูปพรรณ 96.5%</Label>
+              </Col>
+              <Col xs={3} md={4}>
+                <Label className="price">{goldPrice?.sell_ornament}</Label>
+              </Col>
+              <Col xs={3} md={4}>
+                <Label className="price">{goldPrice?.buy_ornament}</Label>
+              </Col>
+            </Row>
+
           </Row>
 
           {/* Footer */}
