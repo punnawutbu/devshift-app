@@ -15,12 +15,14 @@
   font-weight: bold;
   font-size: 2rem;
   padding: 1rem;
+  text-align: center;
   border-bottom: 1px solid #daa520;
   border-top: 1px solid #daa520;
 }
 
 .gold-price-row {
   padding: 1rem;
+  text-align: center;
   border-bottom: 1px solid #daa520;
 }
 
