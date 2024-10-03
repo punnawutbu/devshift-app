@@ -94,11 +94,29 @@ const Navbar = () => {
                 ราคาทองคำ
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
+              <Link href="/tradingview" className="nav-link text-dark" onClick={handleMenuClick}>
+                TradingView
+              </Link>
+            </li> */}
+            {/* <li className="nav-item">
               <Link href="/newsboard" className="nav-link text-dark" onClick={handleMenuClick}>
                 ข้อมูลข่าวสาร
               </Link>
-            </li>
+            </li> */}
+            {/* เมนู Mini Game พร้อมเมนูย่อย */}
+            {/* <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle text-dark" href="#" id="minigameDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Mini Game
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="minigameDropdown">
+                <li>
+                  <Link href="/minigame/wheel" className="dropdown-item" onClick={handleMenuClick}>
+                    เกมส์วงล้อ
+                  </Link>
+                </li>
+              </ul>
+            </li> */}
           </ul>
         </div>
       </div>

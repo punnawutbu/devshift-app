@@ -1,0 +1,12 @@
+.tradingViewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.chartContainer {
+  width: 100%;
+  max-width: 1200px; /* ขนาดสูงสุดของกราฟ */
+  margin: 20px 0;
+}
