@@ -94,6 +94,11 @@ const Navbar = () => {
                 ราคาทองคำ
               </Link>
             </li>
+            <li className="nav-item">
+              <Link href="/countries-info" className="nav-link text-dark" onClick={handleMenuClick}>
+                ประเทศ
+              </Link>
+            </li>
             {/* <li className="nav-item">
               <Link href="/tradingview" className="nav-link text-dark" onClick={handleMenuClick}>
                 TradingView
