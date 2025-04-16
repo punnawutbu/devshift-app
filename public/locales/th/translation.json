@@ -1,0 +1,27 @@
+{
+  "setSearchText": "พิมพ์คำค้นหา...",
+
+    "home": "หน้าหลัก",
+    "goldPrice": "ราคาทองคำ",
+    "countries": "ข้อมูลประเทศ",
+
+    "source": "ข้อมูลจาก สมาคมค้าทองคำ",
+    "gpTitle": "ราคาทองตามประกาศของสมาคมค้าทองคำ",
+    "gpGoldPrice": "ราคาทองคำ",
+    "gpSellPrice": "ขายออก",
+    "gpBuyPrice": "รับซื้อ",
+    "gpGoldBar": "ทองคำแท่ง",
+    "gpGoldOrnament": "ทองรูปพรรณ",
+    "gpUpdate": "ประจำวันที่",
+
+    "countryName": "ชื่อประเทศ",
+    "countryCapital": "เมืองหลวง",
+    "countryCurrency": "สกุลเงิน",
+    "countryInfoHeader": "ค้นหาข้อมูลประเทศ",
+    "countryRegion": "ภูมิภาค",
+    "countryContinents": "ทวีป",
+    "countryTimezones": "โซนเวลา",
+    "countryPopulation": "ประชากร",
+    "countryArea": "พื้นที่",
+    "countryMessage": "ไม่พบประเทศที่ตรงกับคำค้นหา"
+  }

@@ -5,20 +5,6 @@ const nodeCache = require("node-cache");
 const cache = new nodeCache();
 const cacheKey = "thaiGold";
 const urlGTA = "https://www.goldtraders.or.th/default.aspx";
-const monthTh = {
-  "01": "มกราคม",
-  "02": "กุมภาพันธ์",
-  "03": "มีนาคม",
-  "04": "เมษายน",
-  "05": "พฤษภาคม",
-  "06": "มิถุนายน",
-  "07": "กรกฎาคม",
-  "08": "สิงหาคม",
-  "09": "กันยายน",
-  "10": "ตุลาคม",
-  "11": "พฤศจิกายน",
-  "12": "ธันวาคม",
-};
 
 exports.handler = async (event, context) => {
   return new Promise((resolve, reject) => {
@@ -50,7 +36,7 @@ exports.handler = async (event, context) => {
             sell_bar: goldBar_sell,
             buy_ornament: gold_buy,
             sell_ornament: gold_sell,
-            date: `${date[0]} ${monthTh[date[1]]} ${date[2]}`,
+            date: `${date[0]} ${date[1]} ${date[2]}`,
             time: `${dateTime[4]} ${dateTime[5]}`,
             updatetime: update_time,
           };

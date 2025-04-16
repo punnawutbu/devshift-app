@@ -1,51 +1,54 @@
-/* style.css */
 .body {
   padding: 1rem;
 }
 
 .header-style {
-  font-weight: bold;
+  text-align: center;
   margin-bottom: 1.25rem;
   color: #2f4f4f;
-  font-size: 2.5rem;
-  padding: 1rem;
+  padding: 1rem 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 0.5rem;
+  color: #555;
 }
 
 .header-gold-row {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-top: 1px solid #daa520;
+  border-bottom: 1px solid #daa520;
+  padding: 1rem;
   font-weight: bold;
   font-size: 2rem;
-  padding: 1rem;
-  justify-content: center;
-  text-align: center;
-  border-bottom: 1px solid #daa520;
-  border-top: 1px solid #daa520;
 }
 
-.gold-price-row {
-  padding: 1rem;
+.row-size {
+  display: flex;
   justify-content: center;
   text-align: center;
-  border-bottom: 1px solid #daa520;
+  padding: 0.8rem 0;
+  /* border-bottom: 1px solid #ccc; */
 }
 
-.price {
-  color: #2f4f4f;
-  font-size: 1.5rem;
+.gold-price {
+  font-size: 1.3rem;
   font-weight: bold;
+  color: #2f4f4f;
 }
 
 .Gold-Text {
   color: #2f4f4f;
-  font-size: 1.2rem;
-}
-
-.row-size {
-  padding: 10px;
-}
-
-.price {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .page-footer {
@@ -53,59 +56,40 @@
   padding: 1rem;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 5rem;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
 }
 
 .loading-text {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
+  margin-top: 1rem;
+  font-size: 1.2rem;
   color: #555;
 }
 
-.spinner {
-  margin: 20px auto;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #22a6b3;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 @media (max-width: 576px) {
-  .header-text {
-    font-size: 0.9rem; /* ลดขนาดฟอนต์ในหน้าจอเล็ก */
+  .title {
+    font-size: 1.5rem;
   }
 
-  .row-size {
-    font-size: 0.8rem; /* ลดขนาดฟอนต์ในรายละเอียด */
-    margin-bottom: 0.5rem;
+  .subtitle {
+    font-size: 0.9rem;
   }
 
-  .price {
-    font-size: 0.8rem;
-  }
-
-  .Gold-Text {
-    font-size: 1rem; /* ขนาดข้อความในหน้าจอเล็ก */
-  }
-}
-
-@media (min-width: 768px) {
-  .header-text {
-    font-size: 1.2rem;
-  }
-
-  .price {
-    font-size: 1.1rem;
+  .gold-price {
+    font-size: 1rem;
   }
 
   .Gold-Text {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .header-gold-row {
+    font-size: 1rem;
   }
 }

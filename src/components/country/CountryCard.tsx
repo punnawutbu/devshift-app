@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Card } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 interface Currency {
   name: string;
@@ -43,6 +44,7 @@ export default function CountryCard({ country }: CountryCardProps) {
     latlng,
   } = country;
 
+  const { t } = useTranslation();
   const currencyList = Object.values(currencies || {})
     .map((c: Currency) => `${c.name} (${c.symbol})`)
     .join(', ');
@@ -66,13 +68,13 @@ export default function CountryCard({ country }: CountryCardProps) {
   }
 >
       <div className="text-sm grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <div><strong>เมืองหลวง:</strong> {capital?.[0] || '-'}</div>
-        <div><strong>ภูมิภาค:</strong> {region || '-'}</div>
-        <div><strong>ทวีป:</strong> {continents?.join(', ') || '-'}</div>
-        <div><strong>โซนเวลา:</strong> {timezones?.join(', ') || '-'}</div>
-        <div><strong>สกุลเงิน:</strong> {currencyList || '-'}</div>
-        <div><strong>ประชากร:</strong> {population?.toLocaleString() || '-'}</div>
-        <div><strong>พื้นที่:</strong> {area ? `${area.toLocaleString()} km²` : '-'}</div>
+        <div><strong>{t('countryCapital')}:</strong> {capital?.[0] || '-'}</div>
+        <div><strong>{t('countryRegion')}:</strong> {region || '-'}</div>
+        <div><strong>{t('countryContinents')}:</strong> {continents?.join(', ') || '-'}</div>
+        <div><strong>{t('countryTimezones')}:</strong> {timezones?.join(', ') || '-'}</div>
+        <div><strong>{t('countryCurrency')}:</strong> {currencyList || '-'}</div>
+        <div><strong>{t('countryPopulation')}:</strong> {population?.toLocaleString() || '-'}</div>
+        <div><strong>{t('countryArea')}:</strong> {area ? `${area.toLocaleString()} km²` : '-'}</div>
         <div><strong>Gini (2019):</strong> {gini?.['2019'] || '-'}</div>
       </div>
 

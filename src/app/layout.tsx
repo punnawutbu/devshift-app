@@ -1,6 +1,6 @@
-
 import { ReactNode } from 'react';
-import ClientLayout from './ClientLayout'; // Import Client Layout
+import ClientLayout from './ClientLayout';
+import { Providers } from './Providers';
 
 export const metadata = {
   title: 'DevShift App',
@@ -11,9 +11,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="d-flex flex-column min-vh-100 bg-body">
-        <ClientLayout> {/* นำ ClientLayout มาห่อ children */}
-          {children}
-        </ClientLayout>
+        <Providers>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </Providers>
       </body>
     </html>
   );

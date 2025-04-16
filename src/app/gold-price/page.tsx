@@ -1,8 +1,11 @@
-"use client";
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { Col, Label, Row } from "reactstrap";
+import { Row, Col, Typography, Spin } from 'antd';
+import { useTranslation } from 'react-i18next';
 import '../../styles/gold-price.css';
-import LoadingSpinner from '../../components/LoadingSpinner';
+
+const { Text } = Typography;
 
 interface GoldPrice {
   buy_bar: string;
@@ -14,117 +17,138 @@ interface GoldPrice {
   updatetime: string;
 }
 
+const formatThaiDate = (dateStr: string, lang: string) => {
+  const [day, month, year] = dateStr.split(' ');
+  const monthNames: Record<string, string[]> = {
+    th: [
+      'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+      'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
+    ],
+    en: [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ],
+  };
+
+  const monthIndex = parseInt(month, 10) - 1;
+  const monthName = monthNames[lang][monthIndex];
+  const finalYear = lang === 'th' ? year : (parseInt(year, 10) - 543).toString();
+  return `${day} ${monthName} ${finalYear}`;
+};
+
+const formatRoundLabel = (text: string, lang: string) => {
+  const match = text.match(/\d+/);
+  const roundNumber = match ? match[0] : '';
+  return lang === 'th' ? text : `Change ${roundNumber}`;
+};
+
+const formatUpdateTimeLabel = (text: string, lang: string) => {
+  if (lang === 'th') return text;
+  const match = text.match(/(\d{1,2}):(\d{2})/);
+  if (!match) return text;
+
+  let hour = parseInt(match[1], 10);
+  const minute = match[2];
+  const period = hour >= 12 ? 'PM' : 'AM';
+  if (hour > 12) hour -= 12;
+  if (hour === 0) hour = 12;
+
+  return `At ${hour}:${minute} ${period}`;
+};
+
 const GoldPricePage: React.FC = () => {
   const [goldPrice, setGoldPrice] = useState<GoldPrice>();
   const [loading, setLoading] = useState(true);
+  const { t, i18n } = useTranslation();
 
-  // useEffect(() => {
-  //   const fetchGoldPrice = async () => {
-  //     try {
-  //       const response = await fetch('/api/gold-price');
-  //       const data: GoldPrice = await response.json();
-  //       setGoldPrice(data);
-  //       setLoading(false);
-  //       console.log('data' , typeof data );
-  //       console.log('buy_bar' , typeof data.buy_bar );
-  //     } catch (error) {
-  //       console.error('Error fetching gold price:', error);
-  //       setLoading(false);
-  //     }
-  //   };
-  //   const intervalId = setInterval(fetchGoldPrice, 5000);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, []);
   useEffect(() => {
     const fetchGoldPrice = async () => {
       try {
+        // const response = await fetch('/api/gold-price');
         const response = await fetch('/.netlify/functions/getGoldPrice');
-        const data = await response.json();
+        const data: GoldPrice = await response.json();
         setGoldPrice(data);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching gold price:', error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchGoldPrice();
-    const intervalId = setInterval(fetchGoldPrice, 5 * 1000);
+    const intervalId = setInterval(fetchGoldPrice, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <Spin size="large" />
+        <Text className="loading-text">{t('loading')}</Text>
+      </div>
+    );
+  }
+
   return (
-    <>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="body">
-          {/* Header */}
-          <Row className="header-style">
-            <div className="header-text">
-              <Label className="Gold-Text">
-                Gold Price by GTA / ราคาทองตามประกาศของสมาคมค้าทองคำ
-              </Label>
-            </div>
-            <Col xs={12} >
-              <Label className="Gold-Text">
-                ประจำวันที่ {goldPrice?.date} {goldPrice?.time} {goldPrice?.updatetime}
-              </Label>
-            </Col>
-          </Row>
+    <div className="body">
+      {/* Header */}
+      <Row className="header-style" justify="center">
+        <Col span={24}>
+          <Text className="Gold-Text title">{t('gpTitle')}</Text>
+        </Col>
+        <Col span={24}>
+          <Text className="Gold-Text subtitle">
+            {t('gpUpdate')} {formatThaiDate(goldPrice?.date || '', i18n.language)}{' '}
+            {formatRoundLabel(goldPrice?.time || '', i18n.language)}{' '}
+            {formatUpdateTimeLabel(goldPrice?.updatetime || '', i18n.language)}
+          </Text>
+        </Col>
+      </Row>
 
-          {/* Price Headers */}
-          <Row className="header-gold-row">
-            <Col xs={6} md={4}>
-              <Label className="Gold-Text">ราคาทองคำ</Label>
-            </Col>
-            <Col xs={3} md={4}>
-              <Label className="Gold-Text">ขายออก</Label>
-            </Col>
-            <Col xs={3} md={4}>
-              <Label className="Gold-Text">รับซื้อ</Label>
-            </Col>
-          </Row>
+      {/* Price Header */}
+      <Row className="header-gold-row">
+        <Col xs={8} md={6}>
+          <Text className="Gold-Text">{t('gpGoldPrice')}</Text>
+        </Col>
+        <Col xs={8} md={6}>
+          <Text className="Gold-Text">{t('gpSellPrice')}</Text>
+        </Col>
+        <Col xs={8} md={6}>
+          <Text className="Gold-Text">{t('gpBuyPrice')}</Text>
+        </Col>
+      </Row>
 
-          <Row className="gold-price-row">
-            {/* Gold Bar 96.5% */}
-            <Row className="row-size">
-              <Col xs={6} md={4}>
-                <Label className="Gold-Text">ทองคำแท่ง 96.5%</Label>
-              </Col>
-              <Col xs={3} md={4}>
-                <Label className="price">{goldPrice?.sell_bar}</Label>
-              </Col>
-              <Col xs={3} md={4}>
-                <Label className="price">{goldPrice?.buy_bar}</Label>
-              </Col>
-            </Row>
+      {/* Gold Bar */}
+      <Row className="row-size">
+        <Col xs={8} md={6}>
+          <Text className="Gold-Text">{t('gpGoldBar')} 96.5%</Text>
+        </Col>
+        <Col xs={8} md={6}>
+          <Text className="gold-price">{goldPrice?.sell_bar}</Text>
+        </Col>
+        <Col xs={8} md={6}>
+          <Text className="gold-price">{goldPrice?.buy_bar}</Text>
+        </Col>
+      </Row>
 
-            {/* Gold Ornament 96.5% */}
-            <Row className="row-size">
-              <Col xs={6} md={4}>
-                <Label className="Gold-Text">ทองรูปพรรณ 96.5%</Label>
-              </Col>
-              <Col xs={3} md={4}>
-                <Label className="price">{goldPrice?.sell_ornament}</Label>
-              </Col>
-              <Col xs={3} md={4}>
-                <Label className="price">{goldPrice?.buy_ornament}</Label>
-              </Col>
-            </Row>
+      {/* Gold Ornament */}
+      <Row className="row-size">
+        <Col xs={8} md={6}>
+          <Text className="Gold-Text">{t('gpGoldOrnament')} 96.5%</Text>
+        </Col>
+        <Col xs={8} md={6}>
+          <Text className="gold-price">{goldPrice?.sell_ornament}</Text>
+        </Col>
+        <Col xs={8} md={6}>
+          <Text className="gold-price">{goldPrice?.buy_ornament}</Text>
+        </Col>
+      </Row>
 
-          </Row>
-
-          {/* Footer */}
-          <div className="page-footer" style={{ marginBottom: '8.125rem' }}>
-            <Label>ข้อมูลจาก สมาคมค้าทองคำ</Label>
-          </div>
-        </div>
-      )}
-    </>
-
+      {/* Footer */}
+      <div className="page-footer">
+        <Text>{t('source')}</Text>
+      </div>
+    </div>
   );
 };
 

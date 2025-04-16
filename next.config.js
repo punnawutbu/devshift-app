@@ -2,7 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["devshift.dev", "localhost"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'devshift.dev',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

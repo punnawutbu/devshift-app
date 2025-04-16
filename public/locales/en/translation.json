@@ -1,0 +1,27 @@
+{
+  "setSearchText": "Type search term...",
+
+    "home": "Home",
+    "goldPrice": "Gold Price",
+    "countries": "Countries Info",
+
+    "source": "Information from Gold Traders Association",
+    "gpTitle": "Gold Price by Gold Traders Association",
+    "gpGoldPrice": "Gold Price",
+    "gpSellPrice": "Sell Price",
+    "gpBuyPrice": "Buy Price",
+    "gpGoldBar": "Gold Bar",
+    "gpGoldOrnament": "Gold Ornament",
+    "gpUpdate": "Price At",
+
+    "countryName": "Country Name",
+    "countryCapital": "Capital",
+    "countryCurrency": "Currency",
+    "countryInfoHeader": "Find country information",
+    "countryRegion": "Region",
+    "countryContinents": "Continents",
+    "countryTimezones": "Time Zones",
+    "countryPopulation": "Population",
+    "countryArea": "Area",
+    "countryMessage": "No countries found matching the search term."
+  }

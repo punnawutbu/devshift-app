@@ -2,17 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import CountryCard from '@/components/country/CountryCard';
-import { Spin, Pagination } from 'antd';
-import SearchForm, { Option } from '@/components/SearchForm';  // เปลี่ยนเป็น SearchForm
+import { Typography, Spin, Pagination } from 'antd';
+import SearchForm, { Option } from '@/components/SearchForm';
+import { useTranslation } from 'react-i18next';
 
 type CountryKey = 'name' | 'capital' | 'currency';
+const { Text } = Typography;
 
 export default function Home() {
   const [countries, setCountries] = useState<any[]>([]);
   const [filteredCountries, setFilteredCountries] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
-  // กำหนดชนิดของ key ให้ตรงกับ generic
   const [searchKey, setSearchKey] = useState<CountryKey>('name');
   const [searchText, setSearchText] = useState('');
 
@@ -23,11 +25,16 @@ export default function Home() {
   const endIndex = startIndex + itemsPerPage;
   const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
 
-  // ตัวเลือกสำหรับ SearchForm
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   const countryOptions: Option<CountryKey>[] = [
-    { label: 'ชื่อประเทศ', value: 'name' },
-    { label: 'เมืองหลวง', value: 'capital' },
-    { label: 'สกุลเงิน', value: 'currency' },
+    { label: t('countryName'), value: 'name' },
+    { label: t('countryCapital'), value: 'capital' },
+    { label: t('countryCurrency'), value: 'currency' },
   ];
 
   useEffect(() => {
@@ -69,60 +76,57 @@ export default function Home() {
     setCurrentPage(1);
   }, [searchKey, searchText, countries]);
 
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <Spin size="large" />
+        <Text className="loading-text">{t('loading')}</Text>
+      </div>
+    );
+  }
+
   return (
     <main className="bg-gray-50 min-h-screen py-10">
       <div className="container max-w-screen-xl mx-auto px-4">
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
-          ค้นหาข้อมูลประเทศ
+          {hasMounted ? t('countryInfoHeader') : ''}
         </h1>
 
-        {/* ใช้ SearchForm แทน CountrySearchForm */}
         <SearchForm<CountryKey>
           options={countryOptions}
           selectValue={searchKey}
           onSelectChange={setSearchKey}
           inputValue={searchText}
           onInputChange={setSearchText}
-          placeholder="พิมพ์คำค้นหา..."
+          placeholder={t('setSearchText')}
           selectWidth={180}
         />
 
-        {loading ? (
-          <div className="flex justify-center items-center min-h-[200px]">
-            <Spin size="large" />
-          </div>
-        ) : (
-          <>
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {paginatedCountries.length > 0 ? (
-                paginatedCountries.map((country) => (
-                  <CountryCard
-                    key={country.name.common}
-                    country={country}
-                  />
-                ))
-              ) : (
-                <p className="text-center col-span-full text-gray-600">
-                  ไม่พบประเทศที่ตรงกับคำค้นหา
-                </p>
-              )}
-            </div>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {paginatedCountries.length > 0 ? (
+            paginatedCountries.map((country) => (
+              <CountryCard key={country.name.common} country={country} />
+            ))
+          ) : (
+            <p className="text-center col-span-full text-gray-600">
+              {t('countryMessage')}
+            </p>
+          )}
+        </div>
 
-            {totalPages > 1 && (
-              <div className="flex justify-center mt-10">
-                <Pagination
-                  current={currentPage}
-                  total={filteredCountries.length}
-                  pageSize={itemsPerPage}
-                  onChange={(page) => setCurrentPage(page)}
-                  showSizeChanger
-                  pageSizeOptions={[9, 18, 27]}
-                  onShowSizeChange={(_, size) => setItemsPerPage(size)}
-                  showQuickJumper
-                />
-              </div>
-            )}
-          </>
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-10">
+            <Pagination
+              current={currentPage}
+              total={filteredCountries.length}
+              pageSize={itemsPerPage}
+              onChange={(page) => setCurrentPage(page)}
+              showSizeChanger
+              pageSizeOptions={[9, 18, 27]}
+              onShowSizeChange={(_, size) => setItemsPerPage(size)}
+              showQuickJumper
+            />
+          </div>
         )}
       </div>
     </main>
