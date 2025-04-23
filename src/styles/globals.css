@@ -206,4 +206,8 @@ body {
   .col {
     padding: 10px;
   }
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }  
 }

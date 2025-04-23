@@ -7,13 +7,14 @@ export const metadata = {
   description: 'A description for the app.',
 };
 
+// layout.tsx
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className="d-flex flex-column min-vh-100 bg-body">
+    <html lang="en" className="overflow-x-hidden">
+      <body className="min-h-screen bg-body overflow-x-hidden">
         <Providers>
           <ClientLayout>
-            {children}
+            <div className="max-w-screen-xl mx-auto px-4">{children}</div>
           </ClientLayout>
         </Providers>
       </body>
