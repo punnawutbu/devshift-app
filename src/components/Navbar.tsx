@@ -59,14 +59,14 @@ const Navbar = () => {
         </Link>
       ),
     },
-    {
-      key: '/countries-info',
-      label: (
-        <Link href="/countries-info" style={{ textDecoration: 'none' }}>
-          {t('countries')}
-        </Link>
-      ),
-    },
+    // {
+    //   key: '/countries-info',
+    //   label: (
+    //     <Link href="/countries-info" style={{ textDecoration: 'none' }}>
+    //       {t('countries')}
+    //     </Link>
+    //   ),
+    // },
   ];
 
   if (!isReady) return null;
