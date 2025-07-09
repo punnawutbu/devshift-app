@@ -10,6 +10,11 @@ import { useRouter } from 'next/navigation';
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
+const langDisplayMap: Record<string, string> = {
+  en: 'EN',
+  th: 'TH',
+};
+
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const router = useRouter();
@@ -20,7 +25,8 @@ const Navbar = () => {
 
   useEffect(() => {
     if (i18n.language) {
-      setCurrentLang(i18n.language);
+      const normalizedLang = i18n.language.split('-')[0]; // ✅ Normalize
+      setCurrentLang(normalizedLang);
       setIsReady(true);
     }
   }, [i18n.language]);
@@ -59,14 +65,14 @@ const Navbar = () => {
         </Link>
       ),
     },
-    {
-      key: '/countries-info',
-      label: (
-        <Link href="/countries-info" style={{ textDecoration: 'none' }}>
-          {t('countries')}
-        </Link>
-      ),
-    },
+    // {
+    //   key: '/countries-info',
+    //   label: (
+    //     <Link href="/countries-info" style={{ textDecoration: 'none' }}>
+    //       {t('countries')}
+    //     </Link>
+    //   ),
+    // },
   ];
 
   if (!isReady) return null;
@@ -112,7 +118,7 @@ const Navbar = () => {
         <div>
           <Dropdown overlay={languageMenu} placement="bottomRight">
             <Button icon={<GlobalOutlined />} type="text">
-              {currentLang.toUpperCase()}
+              {langDisplayMap[currentLang] ?? currentLang.toUpperCase()}
             </Button>
           </Dropdown>
 
