@@ -18,22 +18,68 @@ interface GoldPrice {
 }
 
 const formatThaiDate = (dateStr: string, lang: string) => {
-  console.log('Formatting date:', dateStr, 'for language:', lang);
-  const [day, month, year] = dateStr.split(' ');
+  console.log("Formatting date:", dateStr, "for language:", lang);
+
+  const parts = dateStr.split(" ");
+  if (parts.length !== 3) {
+    console.warn("Invalid dateStr format:", dateStr);
+    return dateStr;
+  }
+
+  const [day, month, year] = parts;
+
   const monthNames: Record<string, string[]> = {
     th: [
-      'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
-      'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม",
     ],
     en: [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ],
   };
 
+  const normalizedLang =
+    lang.startsWith("th") ? "th" :
+    lang.startsWith("en") ? "en" :
+    "th"; // default
+
   const monthIndex = parseInt(month, 10) - 1;
-  const monthName = monthNames[lang][monthIndex];
-  const finalYear = lang === 'th' ? year : (parseInt(year, 10) - 543).toString();
+
+  if (
+    !monthNames[normalizedLang] ||
+    Number.isNaN(monthIndex) ||
+    monthIndex < 0 ||
+    monthIndex > 11
+  ) {
+    console.warn("Invalid month/lang:", { lang, normalizedLang, month, monthIndex });
+    return dateStr; // หรือ return "" / รูปแบบอื่นตามต้องการ
+  }
+
+  const monthName = monthNames[normalizedLang][monthIndex];
+  const finalYear =
+    normalizedLang === "th" ? year : (parseInt(year, 10) - 543).toString();
+
   return `${day} ${monthName} ${finalYear}`;
 };
 
@@ -65,8 +111,8 @@ const GoldPricePage: React.FC = () => {
   useEffect(() => {
     const fetchGoldPrice = async () => {
       try {
-        // const response = await fetch('/api/gold-price');
-        const response = await fetch('/.netlify/functions/getGoldPrice');
+        const response = await fetch('/api/gold-price');
+        // const response = await fetch('/.netlify/functions/getGoldPrice');
         const data: GoldPrice = await response.json();
         setGoldPrice(data);
       } catch (error) {

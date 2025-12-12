@@ -24,9 +24,9 @@ export default function Error({ error, reset }: ErrorProps) {
           ขออภัย ดูเหมือนว่าเกิดข้อผิดพลาดขึ้น กรุณาลองใหม่อีกครั้ง
         </p>
 
-        <pre className="bg-gray-200 dark:bg-gray-800 text-red-600 dark:text-red-400 p-4 rounded-lg shadow-inner text-sm max-h-60 overflow-auto w-full text-left whitespace-pre-wrap">
+        {/* <pre className="bg-gray-200 dark:bg-gray-800 text-red-600 dark:text-red-400 p-4 rounded-lg shadow-inner text-sm max-h-60 overflow-auto w-full text-left whitespace-pre-wrap">
           {error.message}
-        </pre>
+        </pre> */}
 
         <button
           onClick={reset}
