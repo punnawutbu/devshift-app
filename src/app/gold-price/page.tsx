@@ -18,6 +18,7 @@ interface GoldPrice {
 }
 
 const formatThaiDate = (dateStr: string, lang: string) => {
+  console.log('Formatting date:', dateStr, 'for language:', lang);
   const [day, month, year] = dateStr.split(' ');
   const monthNames: Record<string, string[]> = {
     th: [

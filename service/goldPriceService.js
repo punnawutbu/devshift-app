@@ -43,7 +43,8 @@ const getGoldPrice = () => {
           };
           cache.set(cacheKey, data, 120);
           resolve(data);
-          console.log("Get gold price from website");
+          // console.log("Get gold price from website");
+          // console.log(`Response: ${JSON.stringify(data)}`);
         } else {
           console.log(`Error fetching gold price: ${error}`);
           resolve(null);
@@ -51,7 +52,8 @@ const getGoldPrice = () => {
       });
     } else {
       resolve(data);
-      console.log("Get gold price from cache");
+      // console.log("Get gold price from cache");
+      // console.log(`Cache Response: ${JSON.stringify(data)}`);
     }
     
   });
