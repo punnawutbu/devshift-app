@@ -112,7 +112,9 @@ const GoldPricePage: React.FC = () => {
     const fetchGoldPrice = async () => {
       try {
         // const response = await fetch('/api/gold-price');
-        const response = await fetch('/.netlify/functions/getGoldPrice');
+        const response = await fetch('/api/gold-price-from-api');
+        // const response = await fetch('/.netlify/functions/getGoldPrice');
+        // const response = await fetch('/.netlify/functions/getGoldPriceFromAPI');
         const data: GoldPrice = await response.json();
         setGoldPrice(data);
       } catch (error) {

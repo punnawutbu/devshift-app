@@ -58,9 +58,9 @@ const Navbar = () => {
       ),
     },
     {
-      key: '/gold-price',
+      key: '/gold-price-dashboard',
       label: (
-        <Link href="/gold-price" style={{ textDecoration: 'none' }}>
+        <Link href="/gold-price-dashboard" style={{ textDecoration: 'none' }}>
           {t('goldPrice')}
         </Link>
       ),
