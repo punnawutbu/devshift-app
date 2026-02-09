@@ -93,10 +93,25 @@ const GoldPriceDashboardPage: React.FC = () => {
     let latestData: LatestResponse | null = null;
 
     try {
-      const res = await fetch('/.netlify/functions/getGoldLatest', { cache: 'no-store' });
-      if (!res.ok) throw new Error(`Latest HTTP ${res.status}`);
+      // const res = await fetch('/.netlify/functions/getGoldLatest', { cache: 'no-store' });
+      // if (!res.ok) throw new Error(`Latest HTTP ${res.status}`);
 
-      const data: LatestResponse = await res.json();
+      // const data: LatestResponse = await res.json();
+      const data: LatestResponse = {
+        source: 'Mock Source',
+        goldPriceID: 0,
+        asTime: new Date().toISOString(),
+        seq: 0,
+        priceSeq: 0,
+        bar_buy: 0,
+        bar_sell: 0,
+        orn_buy: 0,
+        orn_sell: 0,
+        usd_thb: 0,
+        gold_spot: 0,
+        change_prev: 0,
+        change_day: 0,
+      };
       latestData = data;
       setLatest(data);
     } catch (err: any) {
