@@ -123,14 +123,15 @@ const GoldPriceDashboardPage: React.FC = () => {
       const date = toDateOnly(latestData?.asTime);
       if (!date) throw new Error('No date');
 
-      const res = await fetch(
-        `/.netlify/functions/getGoldHistory?startDate=${date}&endDate=${date}`,
-        { cache: 'no-store' }
-      );
+      // const res = await fetch(
+      //   `/.netlify/functions/getGoldHistory?startDate=${date}&endDate=${date}`,
+      //   { cache: 'no-store' }
+      // );
 
-      if (!res.ok) throw new Error(`History HTTP ${res.status}`);
+      // if (!res.ok) throw new Error(`History HTTP ${res.status}`);
 
-      const arr: HistoryItem[] = await res.json();
+      // const arr: HistoryItem[] = await res.json();
+      const arr: HistoryItem[] = [];
 
       setHistory(
         [...arr].sort((a, b) => new Date(b.asTime).getTime() - new Date(a.asTime).getTime())
