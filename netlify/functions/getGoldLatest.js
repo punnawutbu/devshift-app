@@ -23,16 +23,20 @@ function setCache(val) {
 }
 
 function commonHeaders() {
-  // ทำให้เหมือนเรียกจาก browser มากขึ้น (ช่วยแก้ 403 จาก WAF ได้บ่อย)
+  // ทำให้เหมือน browser มากขึ้น (ช่วยแก้ 403 จาก WAF ได้บ่อย)
   return {
     Accept: "application/json,text/plain,*/*",
     "Accept-Language": "th-TH,th;q=0.9,en-US;q=0.8,en;q=0.7",
     "User-Agent":
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     Referer: "https://www.goldtraders.or.th/",
     Origin: "https://www.goldtraders.or.th",
-    // บาง WAF ชอบ header นี้
-    Connection: "keep-alive",
+    "Accept-Encoding": "gzip, deflate, br",
+
+    // optional but often helps with WAF heuristics
+    "Sec-Fetch-Site": "same-origin",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Dest": "empty",
   };
 }
 
@@ -42,6 +46,7 @@ function okJson(body, extraHeaders = {}) {
     headers: {
       "Content-Type": "application/json",
       "Cache-Control": "no-store",
+      "Access-Control-Allow-Origin": "*",
       ...extraHeaders,
     },
     body: JSON.stringify(body),
@@ -54,13 +59,14 @@ function errJson(statusCode, body) {
     headers: {
       "Content-Type": "application/json",
       "Cache-Control": "no-store",
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify(body),
   };
 }
 
 exports.handler = async (event) => {
-  // เผื่อมี preflight (ป้องกันไว้)
+  // เผื่อมี preflight
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 204,
@@ -80,12 +86,13 @@ exports.handler = async (event) => {
     const res = await axios.get(API_URL, {
       timeout: 8000,
       headers: commonHeaders(),
-      // เผื่อ upstream ส่ง non-2xx จะได้เข้า catch เดิม
+      // ให้เข้า flow เดิมแม้ upstream non-2xx
       validateStatus: () => true,
+      // กัน axios แปลง/เดา content-type แปลก ๆ
+      responseType: "json",
     });
 
     if (res.status < 200 || res.status >= 300) {
-      // สำคัญ: ส่ง status จริงกลับ (เช่น 403) จะได้ debug ง่าย
       const rawText =
         typeof res.data === "string"
           ? res.data.slice(0, 800)
@@ -125,7 +132,7 @@ exports.handler = async (event) => {
       change_prev: p.priceChangeFromPrevRow ?? null,
       change_day: p.priceChangeFromPrevDayLast ?? null,
 
-      // เก็บ raw ไว้ (แต่ถ้ากังวล payload ใหญ่ค่อยปิด)
+      // เก็บ raw ไว้ (ถ้าหนักไปค่อยลบออก)
       raw: p,
     };
 
@@ -133,7 +140,6 @@ exports.handler = async (event) => {
 
     return okJson(data, { "x-cache": "MISS" });
   } catch (err) {
-    // axios error แบบจริงจัง
     const status = err?.response?.status || 500;
     const data = err?.response?.data;
     const rawText =
